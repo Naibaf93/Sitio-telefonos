@@ -40,3 +40,27 @@ h4 {
     font-size: 18px;
     text-decoration: underline;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px; 
+    text-align: left;
+}
+
+th {
+    background-color: darkolivegreen;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    border-radius: 15px;
+}
+
+td {
+    background-color: #FFFFE0;
+}
