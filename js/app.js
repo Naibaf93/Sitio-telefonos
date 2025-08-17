@@ -89,3 +89,45 @@ async function agregarUno() {
         console.error(error)
     }
 }
+
+async function modificarUno() {        
+    try {
+        let id = document.getElementById('txtConsulta').value;
+        let nombre = document.getElementById('consultaNombre').value;
+        let modelo = document.getElementById('consultaModelo').value;
+        let color = document.getElementById('consultaColor').value;
+        let almacenamiento = document.getElementById('consultaAlmacenamiento').value;
+        let procesador = document.getElementById('consultaProcesador').value;
+        
+        if (nombre === '') {
+            alert('El registro a modificar no está completo');
+            return;
+        }
+
+        fetch('https://my-json-server.typicode.com/fedegaray/telefonos/dispositivos/' + id, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                nombre: nombre,
+                data: {
+                    modelo: modelo,
+                    color: color,
+                    almacenamiento: almacenamiento,
+                    procesador: procesador
+                }
+            })
+        })
+        .then(respuesta => respuesta.json())
+        .then(data => {
+             alert(`Se ha modificado el archivo ${id}. Nuevo contenido:\n${JSON.stringify(data)}`);
+            //Llama a la función obtenerTodos() para actualizar la lista de dispositivos
+            //No veremos esa actualización porque la API real no se modificará
+            obtenerTodos();
+        })
+        .catch(error => { throw new Error("Error en la solicitud: " + error) })
+    } catch (error) {
+        console.error(error)
+    }
+}
