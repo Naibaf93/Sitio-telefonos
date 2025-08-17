@@ -53,3 +53,39 @@ async function consultarUno() {
         console.error(error)
     }
 }
+
+async function agregarUno() {
+    try {
+        let marca = document.getElementById("inputMarca").value;
+        let modelo = document.getElementById("inputModelo").value;
+        let color = document.getElementById("inputColor").value;
+        let almacenamiento = document.getElementById("inputAlmacenamiento").value;
+        let procesador = document.getElementById("inputProcesador").value;
+
+        // Nota: La API proporcionada (my-json-server) no permite la creación real de nuevos registros
+        // en el repositorio de GitHub. Solo simula las operaciones POST.
+        fetch('https://my-json-server.typicode.com/fedegaray/telefonos/dispositivos/', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                marca: marca,
+                modelo: modelo,
+                color: color,
+                almacenamiento: almacenamiento,
+                procesador: procesador
+            })
+        })
+        .then(respuesta => respuesta.json())
+        .then(data => {    
+            //Llama a la función obtenerTodos() para actualizar la lista de dispositivos
+            //No veremos esa actualización porque la API real no se modificará
+            obtenerTodos();
+            alert(`Se ha agregado un nuevo archivo:\nMarca: ${data.marca}\nModelo: ${data.modelo}\nColor: ${data.color}\nAlmacenamiento: ${data.almacenamiento}\nProcesador: ${data.procesador}`);
+        })
+        .catch(error => { throw new Error("Error en la solicitud: " + error) })
+    } catch (error) {
+        console.error(error)
+    }
+}
