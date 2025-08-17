@@ -131,3 +131,31 @@ async function modificarUno() {
         console.error(error)
     }
 }
+
+async function eliminarUno() {
+    try {
+        let id = document.getElementById('txtConsulta').value;
+
+        if (id === '') {
+            alert('No ha ingresado ningún ID');
+            return;
+        }
+
+        axios.delete('https://my-json-server.typicode.com/fedegaray/telefonos/dispositivos/' + id)
+        .then(respuesta => {
+            alert(`Se ha eliminado el archivo ${id}.`);
+            document.getElementById('consultaNombre').value = "";
+            document.getElementById('consultaModelo').value = "";
+            document.getElementById('consultaColor').value = "";
+            document.getElementById('consultaAlmacenamiento').value = "";
+            document.getElementById('consultaProcesador').value = "";
+
+            //Llama a la función obtenerTodos() para actualizar la lista de dispositivos
+            //No veremos esa actualización porque la API real no se modificará
+            obtenerTodos();
+        })
+        .catch(error => { throw new Error("Error en la solicitud: " + error) })
+    } catch (error) {
+        console.error(error)
+    }
+}
